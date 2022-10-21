@@ -1,0 +1,4 @@
+peewee
+configparser
+flask
+psycopg2
