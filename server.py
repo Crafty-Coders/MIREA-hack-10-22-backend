@@ -5,6 +5,7 @@ app = Flask("LMS")
 
 @app.route('/courses')
 def courses():
-    
+   pass
+
 
 app.run()
