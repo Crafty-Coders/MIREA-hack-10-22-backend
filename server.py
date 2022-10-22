@@ -36,10 +36,6 @@ def courses():
     }
     
     return str(res)
-    
-    
-    
-       
 
 
 app.run()
