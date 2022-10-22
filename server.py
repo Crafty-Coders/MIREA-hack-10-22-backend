@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from db import Course, Lecture
 
 app = Flask("LMS")
@@ -7,5 +7,7 @@ app = Flask("LMS")
 def courses():
    pass
 
-
+@app.route('/')
+def homepage():
+   return render_template('homepage.html')
 app.run()
