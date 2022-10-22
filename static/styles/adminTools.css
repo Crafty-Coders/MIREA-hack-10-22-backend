@@ -1,5 +1,5 @@
-*{
-    font-family: 'helvetica';
+* {
+    font-family: 'helvetica', sans-serif;
 }
 
 body {
@@ -24,25 +24,38 @@ body {
     margin: auto;
 }
 
-.lecture-list{
+.course-list {
     display: flex;
     flex-direction: column;
     height: 20rem;
     width: 40rem;
 }
 
+
+.courseBtn {
+    border: none;
+    font-size: 20px;
+    color: rgb(13, 92, 70);
+    background-color: transparent;
+    width: 20rem;
+}
+
 .lecture {
     font-size: 17pt;
     color: black;
 }
+
+.btnRow {
+    display: flex;
+    flex-direction: row;
+    margin: 16rem auto auto;
+}
+
 .addLectureTxt {
     font-size: 14pt;
 }
 
 .addLectureBtn {
-    margin: auto;
-    margin-top: 16rem;
-    border-radius: 15px;
     width: 18vw;
     height: 8vh;
     border-radius: 25px;
@@ -50,7 +63,8 @@ body {
     border: 2px solid rgb(4, 220, 98);
     transition: .2s ease-in-out;
 }
-    .addLectureBtn:hover {
-        background: rgb(4, 220, 98);
-        color: #fff;
-    }
+
+.addLectureBtn:hover {
+    background: rgb(4, 220, 98);
+    color: white;
+}

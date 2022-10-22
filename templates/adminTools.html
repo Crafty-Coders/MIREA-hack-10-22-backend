@@ -11,15 +11,23 @@
         </h3>
     </div>
 
-    <div class="lecture-list">
-        {% for lec in lectures %}
-        {{lec.title}}
+    <div class="course-list">
+        {% for course in coursesList %}
+        <button class="courseBtn" onclick="showLectures()">{{course.title}}</button>
         {% endfor %}
     </div>
-    <button class="addLectureBtn">
-        <div class="addLectureTxt">
-            Добавить лекцию
-        </div>
-    </button>
+    
+    <div class="btnRow">
+        <button class="addLectureBtn" onclick="addCourse()">
+            <div class="addLectureTxt"> 
+                Добавить курс
+            </div>
+        </button>
+        <button class="addLectureBtn" onclick="addLecture()">
+            <div class="addLectureTxt">
+                Добавить лекцию
+            </div>
+        </button>
+    </div>
 
 </body>
