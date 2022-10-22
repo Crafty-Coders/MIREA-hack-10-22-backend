@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/adminTools.css') }}">
+</head>
+
+<body>
+    <div class="appBar">
+        <h3 class="title">
+            Admin tools
+        </h3>
+    </div>
+
+    <div class="lecture-list">
+        {% for lec in lectures %}
+        {{lec.title}}
+        {% endfor %}
+    </div>
+    <button class="addLectureBtn">
+        <div class="addLectureTxt">
+            Добавить лекцию
+        </div>
+    </button>
+
+</body>

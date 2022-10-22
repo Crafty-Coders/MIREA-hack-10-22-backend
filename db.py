@@ -32,8 +32,10 @@ class Lecture(Model):
 
     class Meta:
         database = db
-    
+
 def createTables():
     db.create_tables([Course, Lecture])
+
+
     
 # createTables()
