@@ -1,6 +1,5 @@
 from flask import Flask
 from db import Course, Lecture
-import json
 
 app = Flask("LMS")
 
