@@ -18,10 +18,10 @@ class Course(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
     description = TextField()
-    
+
     class Meta:
         database = db
-        
+
 
 class Lecture(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
@@ -33,8 +33,9 @@ class Lecture(Model):
 
     class Meta:
         database = db
-    
-def createTables():
+
+
+def create_tables():
     db.create_tables([Course, Lecture])
-    
-# createTables()
+
+# create_tables()
