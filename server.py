@@ -5,35 +5,31 @@ app = Flask("LMS")
 
 @app.route('/courses')
 def courses():
-    lectures = []
-    courses = []
+    res = {
+        "lectures": [],
+        "courses": []
+    }
     
     for l in Lecture.select():
-        lecture = {
+        date, time = str(l.date).split(" ")
+        date = " ".join(date.split("-")[::-1])
+        time = ":".join(time.split(":")[0:2])
+        
+        res["lectures"].append({
            "duration": l.duration,
            "id": str(l.id),
            "title": l.title,
            "description": l.description,
-           "courseId": str(l.course_id)
-        }
-        date, time = str(l.date).split(" ")
-        date = " ".join(date.split("-")[::-1])
-        time = ":".join(time.split(":")[0:2])
-        lecture["date"] = date + " " + time
-        lectures.append(lecture)
+           "courseId": str(l.course_id),
+           "date": date + " " + time
+        })
 
     for c in Course.select():
-        course = {
+        res["courses"].append({
             "courseId": str(c.id),
             "coursename": c.title,
             "coursedescription": c.description
-        }
-        courses.append(course)
-    
-    res = {
-        "lectures": lectures,
-        "courses": courses
-    }
+        })
     
     return str(res)
 
