@@ -1,4 +1,5 @@
 from typing import Text
+import uuid
 from peewee import *
 from configparser import ConfigParser
 
@@ -14,6 +15,7 @@ db = PostgresqlDatabase(
 
 
 class Course(Model):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
     description = TextField()
     
@@ -22,10 +24,12 @@ class Course(Model):
         
 
 class Lecture(Model):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
     description = TextField()
     date = DateTimeField()
-    courseid = ForeignKeyField(Course, backref="lectures")
+    course = ForeignKeyField(Course, backref="courses")
+    duration = IntegerField(null=False)
 
     class Meta:
         database = db
@@ -34,4 +38,3 @@ def createTables():
     db.create_tables([Course, Lecture])
     
 # createTables()
-
