@@ -3,9 +3,11 @@ import uuid
 from peewee import *
 from configparser import ConfigParser
 
+# Чтение данных для подключения БД из конфига
 db_cfg = ConfigParser()
 db_cfg.read("DB.cfg")
 
+# Создание объекта БД
 db = PostgresqlDatabase(
     host=db_cfg["DB"]["DB_HOST"],
     database=db_cfg["DB"]["DB_NAME"],
@@ -14,6 +16,7 @@ db = PostgresqlDatabase(
 )
 
 
+# Создание объекта курса
 class Course(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
@@ -23,6 +26,7 @@ class Course(Model):
         database = db
 
 
+# Создание объекта лекции
 class Lecture(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
@@ -35,6 +39,7 @@ class Lecture(Model):
         database = db
 
 
+# Функция для создания таблиц бд (используется один раз)
 def create_tables():
     db.create_tables([Course, Lecture])
 

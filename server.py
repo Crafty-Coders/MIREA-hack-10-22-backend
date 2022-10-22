@@ -1,6 +1,7 @@
 from flask import Flask
 from db import Course, Lecture
 
+# создание flask-приложения
 app = Flask("LMS")
 
 
@@ -9,17 +10,23 @@ def courses():
     res = {
         "lectures": [],
         "courses": []
-    }
+    }  # Ответом на запрос является объекта, содержащий массивы лекций и курсов
 
-    for lecture in Lecture.select():
+    for lecture in Lecture.select():  # Перебираем лекции из БД
 
+        # Дату начала разбиваем на дату и время
         date, start_time = str(lecture.start).split(" ")
+        # Разбиваем дату на три числа, инвертируем и записываем через точку
         date = ".".join(date.split("-")[::-1])
+        # Разбиваем время на три числа, отбрасываем секунды и записываем через :
         start_time = ":".join(start_time.split(":")[0:2])
 
+        # Дату окончания разбиваем нга дату и время, отбрасывая дату, так как она известна из начала
         _, end_time = str(lecture.end).split(" ")
+        # Разбиваем время на три числа, отбрасываем секунды и записываем через :
         end_time = ":".join(end_time.split(":")[0:2])
 
+        # Формируем словарь и добавляем его в массив лекций
         res["lectures"].append({
             "id": str(lecture.id),
             "title": lecture.title,
@@ -27,17 +34,20 @@ def courses():
             "courseId": str(lecture.course_id),
             "date": date,
             "start": start_time,
-            "end":  end_time
+            "end": end_time
         })
 
-    for c in Course.select():
+    for c in Course.select():  # Перебираем курсы из БД
+        #  Формируем словарь и добавляем его в массив курсов
         res["courses"].append({
             "courseId": str(c.id),
             "coursename": c.title,
             "coursedescription": c.description
         })
 
+    # Возвращаем ответ на запрос
     return str(res)
 
 
+# Запуск flask-приложения
 app.run()
