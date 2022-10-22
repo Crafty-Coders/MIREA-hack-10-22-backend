@@ -1,6 +1,7 @@
 from multiprocessing.sharedctypes import Value
 from flask import Flask, render_template
 from db import Course, Lecture
+from viewModels import CoursesIndex
 
 app = Flask("LMS")
 
@@ -10,11 +11,14 @@ def courses():
 
 @app.route('/adminTools')
 def adminTools():
-   lectures = []
-   courses = []
+   lecturesList = []
+   coursesList = []
    for l in Lecture.select():
-      lectures += [l]
+      lecturesList += [l]
    for c in Course.select():
-      courses += [c]
-   return render_template('adminTools.html', lectures=lectures, courses=courses)
+      coursesList += [c]
+   coursesIndexes = CoursesIndex(len(coursesList))
+
+   return render_template('adminTools.html', lecturesList=lecturesList, coursesList=coursesList, coursesIndexes=coursesIndexes)
+
 app.run()
