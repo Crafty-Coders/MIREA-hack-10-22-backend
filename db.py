@@ -29,6 +29,7 @@ class Lecture(Model):
     description = TextField()
     date = DateTimeField()
     course = ForeignKeyField(Course, backref="courses")
+    duration = IntegerField(null=False)
 
     class Meta:
         database = db
