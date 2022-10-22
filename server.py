@@ -11,18 +11,23 @@ def courses():
         "courses": []
     }
 
-    for l in Lecture.select():
-        date, time = str(l.date).split(" ")
-        date = " ".join(date.split("-")[::-1])
-        time = ":".join(time.split(":")[0:2])
+    for lecture in Lecture.select():
+
+        start_date, start_time = str(lecture.start).split(" ")
+        start_date = " ".join(start_date.split("-")[::-1])
+        start_time = ":".join(start_time.split(":")[0:2])
+
+        end_date, end_time = str(lecture.end).split(" ")
+        end_date = " ".join(end_date.split("-")[::-1])
+        end_time = ":".join(end_time.split(":")[0:2])
 
         res["lectures"].append({
-            "duration": l.duration,
-            "id": str(l.id),
-            "title": l.title,
-            "description": l.description,
-            "courseId": str(l.course_id),
-            "date": date + " " + time
+            "id": str(lecture.id),
+            "title": lecture.title,
+            "description": lecture.description,
+            "courseId": str(lecture.course_id),
+            "start": start_date + " " + start_time,
+            "end":  end_date + " " + end_time
         })
 
     for c in Course.select():

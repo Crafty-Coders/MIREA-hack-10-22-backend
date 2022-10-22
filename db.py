@@ -27,9 +27,9 @@ class Lecture(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
     title = TextField()
     description = TextField()
-    date = DateTimeField()
+    start = DateTimeField()
+    end = DateTimeField()
     course = ForeignKeyField(Course, backref="courses")
-    duration = IntegerField(null=False)
 
     class Meta:
         database = db
