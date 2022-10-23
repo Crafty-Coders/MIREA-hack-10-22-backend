@@ -39,6 +39,26 @@ class Lecture(Model):
         database = db
 
 
+class AdminLogin(Model):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    login = TextField()
+    password = TextField()
+
+    class Meta:
+        database = db
+
+
+class AdminSession(Model):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    access_token = TextField()
+    refresh_token = TextField()
+    admin_id = ForeignKeyField(AdminLogin, backref="adminsessions")
+    start_time = DateTimeField()
+
+    class Meta:
+        database = db
+
+
 # Функция для создания таблиц бд (используется один раз)
 def create_tables():
     db.create_tables([Course, Lecture])

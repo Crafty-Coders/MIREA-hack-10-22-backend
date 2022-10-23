@@ -49,5 +49,10 @@ def courses():
     return str(res)
 
 
+@app.route("/adminLogin")
+def admin_login():
+    pass
+
+
 # Запуск flask-приложения
 app.run()
