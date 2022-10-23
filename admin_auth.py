@@ -57,5 +57,3 @@ def admin_session_refresh(refresh_token):
         "status": 404,
         "message": "Session not found"
     }
-
-print(generate_token())
