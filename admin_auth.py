@@ -1,16 +1,22 @@
 import datetime
+import random
 
 from db import AdminLogin, AdminSession
 
 
 def generate_token():
-    return ""
+    return "".join([chr(random.randint(97, 122)) if random.randint(0, 2) else str(random.randint(0, 10)) for _ in range(40)])
 
 
-def admin_login(login, password, grant_type):
-    if grant_type == password:
+def admin_login(refresh_token="", login="", password=""):
+    if password and login:
         return admin_session_start(login, password)
-    return admin_session_refresh(grant_type)
+    if refresh_token:
+        return admin_session_refresh(refresh_token)
+    return {
+        "status": 401,
+        "message": "Invalid credentials"
+    }
 
 
 def admin_session_start(login, password):
@@ -51,3 +57,5 @@ def admin_session_refresh(refresh_token):
         "status": 404,
         "message": "Session not found"
     }
+
+print(generate_token())
