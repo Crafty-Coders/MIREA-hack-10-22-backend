@@ -49,8 +49,13 @@ def courses():
     return str(res)
 
 
-@app.route("/adminLogin",  methods=['POST', 'GET'])
+@app.route("/adminLogin")
 def admin_login():
+    pass
+
+
+@app.route("/adminData")
+def admindata():
     pass
 
 
