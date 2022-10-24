@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from db import Course, Lecture
 
 # создание flask-приложения
@@ -49,8 +49,11 @@ def courses():
     return str(res)
 
 
-@app.route("/adminLogin")
+@app.route("/adminLogin",  methods=['POST', 'GET'])
 def admin_login():
+    if request.method == 'POST':
+        data = request.get_json()
+        return "aboba"
     return render_template("adminlogin.html")
 
 
