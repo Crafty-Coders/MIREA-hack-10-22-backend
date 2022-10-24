@@ -51,10 +51,7 @@ def courses():
 
 @app.route("/adminLogin",  methods=['POST', 'GET'])
 def admin_login():
-    if request.method == 'POST':
-        data = request.get_json()
-        return "aboba"
-    return render_template("adminlogin.html")
+    pass
 
 
 # Запуск flask-приложения
