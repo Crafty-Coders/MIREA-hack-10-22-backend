@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from db import Course, Lecture
 
 # создание flask-приложения
@@ -51,7 +51,7 @@ def courses():
 
 @app.route("/adminLogin")
 def admin_login():
-    pass
+    return render_template("adminlogin.html")
 
 
 # Запуск flask-приложения
