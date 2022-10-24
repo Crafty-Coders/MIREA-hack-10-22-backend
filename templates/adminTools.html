@@ -2,6 +2,47 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/adminTools.css') }}">
+    <script>
+        function showLectures() {
+            let xhr = new XMLHttpRequest();
+            let url = "/adminTools";
+            xhr.open("POST", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            let showlectures = '{{ showCourseLectures }}'
+            showlectures = showlectures === "False" ? "True" : "False"
+            console.log(showlectures)
+            xhr.send(JSON.stringify({
+                "showLectures": showlectures,
+                "addLecture": '{{showLecturesDialog}}',
+                "addCourse": '{{ showCourseDialog }}'
+            }))
+        }
+
+        function addLecture() {
+            let xhr = new XMLHttpRequest();
+            let url = "/adminTools";
+            xhr.open("POST", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.send(JSON.stringify({
+                "addLecture": !'{{ showLecturesDialog }}',
+                "showLectures": '{{ showCourseLectures }}',
+                "addCourse": '{{ showCourseDialog }}'
+            }))
+        }
+
+        function addCourse() {
+            let xhr = new XMLHttpRequest();
+            let url = "/adminTools";
+            xhr.open("POST", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.send(JSON.stringify({
+                "addCourse": 0,
+                "showLectures": '{{ showCourseLectures }}',
+                "addLecture": '{{ showLectureDialog }}'
+            }))
+        }
+
+    </script>
 </head>
 
 <body>
@@ -13,21 +54,32 @@
 
     <div class="course-list">
         {% for course in coursesList %}
-        <button class="courseBtn" onclick="showLectures()">{{course.title}}</button>
+        <div class="row">
+            <button onclick="showLectures()">{{course.title}}</button>
+            {% if showCourseLectures %}
+            <div class="column">
+                {% for lecture in lecturesList %}
+
+                {% if lecture.course == course.id %}
+                {{lecture.title}}
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         {% endfor %}
     </div>
-    
+
     <div class="btnRow">
         <button class="addLectureBtn" onclick="addCourse()">
-            <div class="addLectureTxt"> 
+            <div class="addLectureTxt">
                 Добавить курс
             </div>
         </button>
-        <button class="addLectureBtn" onclick="addLecture()">
+        <button onclick="addLecture()">
             <div class="addLectureTxt">
                 Добавить лекцию
             </div>
         </button>
     </div>
-
 </body>

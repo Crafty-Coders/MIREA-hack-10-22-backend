@@ -68,3 +68,8 @@ body {
     background: rgb(4, 220, 98);
     color: white;
 }
+
+.addLectureBtn:hover:before {
+    left: 150px;
+    transition: .5s ease-in-out;
+}
