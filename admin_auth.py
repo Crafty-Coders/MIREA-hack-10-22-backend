@@ -20,6 +20,7 @@ def admin_login(login="", password="", refresh_token=""):
 
 
 def admin_session_start(login, password):
+    print("login")
     for admin in AdminLogin.select().where(AdminLogin.login == login and AdminLogin.password == password):
         admin_id = admin.id
         access_token, refresh_token = generate_token(), generate_token()
@@ -41,15 +42,16 @@ def admin_session_start(login, password):
 
 
 def admin_session_refresh(refresh_token):
+    print("refresh")
     if len(AdminSession.select().where(AdminSession.refresh_token == refresh_token)):
         access_token, new_refresh_token = generate_token(), generate_token()
         AdminSession.update(access_token=access_token,
                             refresh_token=new_refresh_token,
-                            start_time=datetime.datetime.now()).where(AdminSession.refresh_token == refresh_token)
+                            start_time=datetime.datetime.now()).where(AdminSession.refresh_token == refresh_token).execute()
         return {
             "status": 200,
             "access_token": access_token,
-            "refresh_token": refresh_token,
+            "refresh_token": new_refresh_token,
             "message": "OK"
         }
 
