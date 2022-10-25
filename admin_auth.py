@@ -5,7 +5,7 @@ from db import AdminLogin, AdminSession
 
 
 def generate_token():
-    return "".join([chr(random.randint(97, 122)) if random.randint(0, 2) else str(random.randint(0, 10)) for _ in range(40)])
+    return "".join([chr(random.randint(97, 122)) if random.randint(0, 2) else str(random.randint(0, 9)) for _ in range(40)])
 
 
 def admin_login(login="", password="", refresh_token=""):
