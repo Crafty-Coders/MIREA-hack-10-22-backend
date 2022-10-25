@@ -4,9 +4,12 @@ from flask_cors import cross_origin, CORS
 
 # создание flask-приложения
 app = Flask("LMS")
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/courses')
+@cross_origin()
 def courses():
     res = {
         "lectures": [],
@@ -47,14 +50,15 @@ def courses():
         })
 
     # Возвращаем ответ на запрос
-    res = jsonify(res)
-    res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
 
-@app.route("/adminLogin")
+@app.route("/adminLogin", methods=['GET', 'POST'])
+@cross_origin()
 def admin_login():
-    pass
+    print(request.get_json())
+    res = {"text": "aboba"}
+    return res
 
 
 @app.route("/adminData")
