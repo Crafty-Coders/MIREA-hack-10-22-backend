@@ -61,6 +61,6 @@ class AdminSession(Model):
 
 # Функция для создания таблиц бд (используется один раз)
 def create_tables():
-    db.create_tables([Course, Lecture])
+    db.create_tables([Course, Lecture, AdminLogin, AdminSession])
 
 # create_tables()
