@@ -8,7 +8,7 @@ def generate_token():
     return "".join([chr(random.randint(97, 122)) if random.randint(0, 2) else str(random.randint(0, 10)) for _ in range(40)])
 
 
-def admin_login(refresh_token="", login="", password=""):
+def admin_login(login="", password="", refresh_token=""):
     if password and login:
         return admin_session_start(login, password)
     if refresh_token:

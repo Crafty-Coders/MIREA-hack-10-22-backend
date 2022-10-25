@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from db import Course, Lecture
 from flask_cors import cross_origin, CORS
+from admin_auth import admin_login
 
 # создание flask-приложения
 app = Flask("LMS")
@@ -55,10 +56,9 @@ def courses():
 
 @app.route("/adminLogin", methods=['GET', 'POST'])
 @cross_origin()
-def admin_login():
-    print(request.get_json())
-    res = {"text": "aboba"}
-    return res
+def adminlogin():
+    data = request.get_json()
+    return admin_login(**data)
 
 
 @app.route("/adminData")
