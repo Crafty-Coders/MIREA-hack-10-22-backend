@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from db import Course, Lecture
+from flask_cors import cross_origin, CORS
 
 # создание flask-приложения
 app = Flask("LMS")
-
 
 @app.route('/courses')
 def courses():
@@ -46,7 +46,9 @@ def courses():
         })
 
     # Возвращаем ответ на запрос
-    return str(res)
+    res = jsonify(res)
+    res.headers.add("Access-Control-Allow-Origin", "*")
+    return res
 
 
 @app.route("/adminLogin")
