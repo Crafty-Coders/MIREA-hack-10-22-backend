@@ -5,6 +5,7 @@ from flask_cors import cross_origin, CORS
 # создание flask-приложения
 app = Flask("LMS")
 
+
 @app.route('/courses')
 def courses():
     res = {
