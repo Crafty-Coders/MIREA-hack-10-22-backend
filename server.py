@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+
+from admin_functions import addLecture, addCourse
 from db import Course, Lecture
 from flask_cors import cross_origin, CORS
 from admin_auth import admin_login
@@ -61,9 +63,21 @@ def adminlogin():
     return admin_login(**data)
 
 
-@app.route("/adminData")
-def admindata():
-    pass
+@app.route("/addLecture", methods=['GET', 'POST'])
+@cross_origin()
+def add_lecture():
+    data = request.get_json()
+    addLecture(**data)
+    return courses
+
+@app.route("/addCourse", methods=['GET', 'POST'])
+@cross_origin()
+def add_course():
+    data = request.get_json()
+    addCourse(**data)
+    return courses
+
+
 
 
 # Запуск flask-приложения
